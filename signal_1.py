@@ -27,7 +27,7 @@ class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
         print("Signal: ",message.message)
 
-signal_lat = 53.369673 
+signal_lat = 53.369673
 signal_long = -6.254447
 
 signal_values = ["GREEN","ORANGE","RED","ORANGE"]
@@ -38,14 +38,15 @@ pubnub.subscribe().channels("signal-1").execute()
 signal_time = 1.0 #5 seconds
 #Runs every 5 seconds
 def operate_signal():
-	pubnub.publish().channel("signal-1").message(str(signal_values[0])).pn_async(my_publish_callback)
-	time.sleep(5)
-	pubnub.publish().channel("signal-1").message(str(signal_values[1])).pn_async(my_publish_callback)
-	time.sleep(1.5)
-	pubnub.publish().channel("signal-1").message(str(signal_values[2])).pn_async(my_publish_callback)
-	time.sleep(5)
-	pubnub.publish().channel("signal-1").message(str(signal_values[3])).pn_async(my_publish_callback)
-	time.sleep(1.5)
+        pubnub.publish().channel("signal-1").message(str(signal_values[0])).pn_async(my_publish_callback)
+        time.sleep(5)
+        pubnub.publish().channel("signal-1").message(str(signal_values[1])).pn_async(my_publish_callback)
+        time.sleep(1.5)
+        pubnub.publish().channel("signal-1").message(str(signal_values[2])).pn_async(my_publish_callback)
+        time.sleep(5)
+        pubnub.publish().channel("signal-1").message(str(signal_values[3])).pn_async(my_publish_callback)
+        time.sleep(1.5)
 l = task.LoopingCall(operate_signal)
 l.start(signal_time)
 reactor.run()
+

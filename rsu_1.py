@@ -45,7 +45,7 @@ class MySubscribeCallback(SubscribeCallback):
             print(jsonAccident)
             jsonAccident['rsuId']="RSU-1"
             postAccidentSignals(jsonAccident)
-        
+
 def fetchAccidentSignals(url):
     response = requests.get(url)
     accidentDataFetched = response.json()
@@ -65,20 +65,19 @@ def postAccidentSignals(data):
 fetchUrl = "https://hi6s5iimc1.execute-api.eu-west-1.amazonaws.com/DeployFinal"
 postUrl = "https://ehbcunqxzi.execute-api.eu-west-1.amazonaws.com/DeployFinal"
 
-
 def main():
 
     pubnub.add_listener(MySubscribeCallback())
     pubnub.subscribe().channels("RSU-1").execute()
 
     fetchAccidentSignals(fetchUrl)
-    
+
     # performPeriodicAccSignalFetch(8,fetchUrl)
     # accidentSignal1 = PostAccidentSignalData("CTRsu321", "CT431", "CT123", "CVT21")
     # jsonStr = json.dumps(accidentSignal1.__dict__)
     # print("Data to be transferred - ")
-    
-    
-    
+
+
+
 if __name__ == "__main__":
     main()

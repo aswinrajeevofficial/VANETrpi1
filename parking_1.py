@@ -26,10 +26,10 @@ class MySubscribeCallback(SubscribeCallback):
         pass
     def message(self, pubnub, message):
         if(message.message == "Currently_Occupied"):
-        	print("Parking Slot Status: OCCUPIED")
-        	reactor.stop()
+                print("Parking Slot Status: OCCUPIED")
+                reactor.stop()
         else:
-        	print("Parking Slot Status: ",message.message)
+                print("Parking Slot Status: ",message.message)
 
 parking_lat = 53.374610
 parking_long = -6.257977
@@ -42,10 +42,10 @@ pubnub.subscribe().channels("parking-1").execute()
 parking_time = 5.0 #5 seconds
 #Runs every 5 seconds
 def operate_signal():
-	pubnub.publish().channel("parking-1").message(str(parking_values[0])).pn_async(my_publish_callback)
-	time.sleep(10)
-	#pubnub.publish().channel("parking-1").message(str(parking_values[1])).pn_async(my_publish_callback)
-	#time.sleep(15)
+        pubnub.publish().channel("parking-1").message(str(parking_values[0])).pn_async(my_publish_callback)
+        time.sleep(10)
+        #pubnub.publish().channel("parking-1").message(str(parking_values[1])).pn_async(my_publish_callback)
+        #time.sleep(15)
 l = task.LoopingCall(operate_signal)
 l.start(parking_time)
 
